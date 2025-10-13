@@ -1,0 +1,62 @@
+.calendar {
+  color: rgb(0, 0, 0);
+  font-family: sans-serif;
+}
+
+.calendar__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  button {
+    background: none;
+    border: 1px solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+}
+
+.calendar__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin-bottom: 5px;
+
+  div {
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.calendar__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+
+  .day {
+    padding: 10px;
+    text-align: center;
+    border-radius: 4px;
+
+    &.other-month {
+      color: gray;
+    }
+
+    &.today {
+      background-color: orange;
+    }
+  }
+}

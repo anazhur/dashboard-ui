@@ -1,4 +1,4 @@
-// import './App.css';
+import './styles/App.scss';
 import Calendar from "./components/Calendar";
 import Clock from "./components/Clock";
 import LoFiPlayer from "./components/LoFiPlayer";

@@ -1,0 +1,31 @@
+.card {
+  // background: #1e1e1e;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 6px 6px 12px #141414,
+              -6px -6px 12px #2a2a2a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: grab;
+}
+
+.card h4 {
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.card p {
+  margin: 0;
+  flex-grow: 1;
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  color: #252525;
+  font-size: 16px;
+  cursor: pointer;
+}
