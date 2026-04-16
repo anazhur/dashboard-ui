@@ -1,31 +1,125 @@
+@import "../../styles/_variables";
+
 .card {
-  // background: #1e1e1e;
-  border-radius: 15px;
-  padding: 15px;
-  box-shadow: 6px 6px 12px #141414,
-              -6px -6px 12px #2a2a2a;
+  position: relative;
+
+  border-radius: 16px;
+  padding: 12px;
+  background: $card-bg;
+
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  gap: 10px;
+  max-width: 95%;
+
   cursor: grab;
+
+  transform: translateZ(0);
 }
 
-.card h4 {
+.dragging {
+  box-shadow: none;
+  transform: scale(1.02);
+}
+
+.content {
   display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
+  flex-direction: column;
+  gap: 4px;
+
+  flex: 1;
 }
 
-.card p {
+.content h4 {
   margin: 0;
-  flex-grow: 1;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.deleteBtn {
-  background: none;
-  border: none;
-  color: #252525;
-  font-size: 16px;
-  cursor: pointer;
+.content p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.actionBtn {
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  background: $bg;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  line-height: 0;
+  padding: 0;
+
+  box-shadow:
+    4px 4px 8px rgba(0, 0, 0, 0.08),
+    -4px -4px 8px rgba(255, 255, 255, 0.8);
+
+  opacity: 1;
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.actionBtn:hover {
+  transform: translateY(-1px);
+  background: $task-card-bg;
+}
+
+.actionBtn:active {
+  transform: scale(0.92);
+
+  box-shadow:
+    inset 3px 3px 6px rgba(0, 0, 0, 0.12),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.9);
+}
+
+.actionBtn svg {
+  width: 50%;
+  height: 50%;
+  flex-shrink: 0;
+
+  transition: transform 0.1s ease;
+}
+
+.actionBtn:active svg {
+  transform: scale(0.9);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card:active {
+  cursor: grabbing;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+
+  box-shadow:
+    4px 4px 8px #c9c9c9,
+    -4px -4px 8px #ffffff;
+
+  z-index: -1;
+  will-change: transform;
+}
+
+.dragging::before {
+  box-shadow: none;
 }

@@ -3,10 +3,23 @@ $bg: #e3ded7;
 $text: #2b241f;
 $accent: #614832;
 $card-bg: #e3ded7;
+$task-card-bg:#ddd8d0;
 
 /* shadows */
 $shadow-light: rgba(255,255,255,1);
 $shadow-dark: rgba(13,39,80,0.12);
 
+$shadow-outset: 
+  -10px -10px 18px $shadow-light,
+   10px  10px 18px $shadow-dark;
+
+$shadow-inset:
+  inset -10px -10px 18px $shadow-light,
+  inset  10px  10px 18px $shadow-dark;
+
 /* font */
 $font: 'Lato', sans-serif;
+
+/* radii / gaps */
+$radius: 16px;
+$gap: 12px;

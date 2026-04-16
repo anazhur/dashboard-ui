@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TaskColumn from "../TaskColumn";
 import Modal from "../Modal/index";
+import { DragDropContext } from "@hello-pangea/dnd";
+import s from "./index.module.scss";
+
+const STORAGE_KEY = "kanbanColumns_v1";
+
+const defaultColumns = {
+  todo: [],
+  doing: [],
+  done: [],
+};
 
 const Taskboard = () => {
-  const [columns, setColumns] = useState({
-    todo: [
-      { id: 1, title: "Layout", text: "Create layout" },
-      { id: 2, title: "Clock", text: "Add clock" },
-    ],
-    doing: [{ id: 3, title: "Calendar", text: "Working on calendar" }],
-    done: [{ id: 4, title: "Setup", text: "Setup project structure" }],
+  const [columns, setColumns] = useState(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return defaultColumns;
+      const parsed = JSON.parse(raw);
+      return parsed;
+    } catch {
+      return defaultColumns;
+    }
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,6 +38,12 @@ const Taskboard = () => {
       return updated;
     });
   };
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(columns));
+    } catch {}
+  }, [columns]);
 
   const openAddModal = (columnKey) => {
     setCurrentColumn(columnKey);
@@ -59,7 +77,7 @@ const Taskboard = () => {
         ...prev,
         [currentColumn]: [
           ...prev[currentColumn],
-          { id: Date.now(), title, text },
+          { id: Date.now(), title, text},
         ],
       }));
     }
@@ -70,29 +88,65 @@ const Taskboard = () => {
     setFormData({ title: "", text: "" });
   };
 
+  const onDragEnd = (result) => {
+    const { source, destination } = result;
+    if (!destination) return;
+
+    const startCol = source.droppableId;
+    const finishCol = destination.droppableId;
+
+    if (startCol === finishCol) {
+      setColumns((prev) => {
+        const items = Array.from(prev[startCol]);
+        const [moved] = items.splice(source.index, 1);
+        items.splice(destination.index, 0, moved);
+        return { ...prev, [startCol]: items };
+      });
+      return;
+    }
+
+    setColumns((prev) => {
+      const startItems = Array.from(prev[startCol]);
+      const finishItems = Array.from(prev[finishCol]);
+      const [moved] = startItems.splice(source.index, 1);
+      finishItems.splice(destination.index, 0, moved);
+
+      return {
+        ...prev,
+        [startCol]: startItems,
+        [finishCol]: finishItems,
+      };
+    });
+  };
+
   return (
-    <>
-      <TaskColumn
-        title="To Do"
-        cards={columns.todo}
-        onDelete={handleDelete}
-        onAddCard={() => openAddModal("todo")}
-        onEditCard={(task) => openEditModal(task, "todo")}
-      />
-      <TaskColumn
-        title="Doing"
-        cards={columns.doing}
-        onDelete={handleDelete}
-        onAddCard={() => openAddModal("doing")}
-        onEditCard={(task) => openEditModal(task, "doing")}
-      />
-      <TaskColumn
-        title="Done"
-        cards={columns.done}
-        onDelete={handleDelete}
-        onAddCard={() => openAddModal("done")}
-        onEditCard={(task) => openEditModal(task, "done")}
-      />
+    <div className={s.board}>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <TaskColumn
+          columnId="todo"
+          title="To Do"
+          cards={columns.todo}
+          onDelete={handleDelete}
+          onAddCard={() => openAddModal("todo")}
+          onEditCard={(task) => openEditModal(task, "todo")}
+        />
+        <TaskColumn
+          columnId="doing"
+          title="Doing"
+          cards={columns.doing}
+          onDelete={handleDelete}
+          onAddCard={() => openAddModal("doing")}
+          onEditCard={(task) => openEditModal(task, "doing")}
+        />
+        <TaskColumn
+          columnId="done"
+          title="Done"
+          cards={columns.done}
+          onDelete={handleDelete}
+          onAddCard={() => openAddModal("done")}
+          onEditCard={(task) => openEditModal(task, "done")}
+        />
+      </DragDropContext>
 
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
@@ -102,18 +156,22 @@ const Taskboard = () => {
               type="text"
               placeholder="Title"
               value={formData.title}
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, title: e.target.value })
+              }
             />
             <textarea
               placeholder="Description"
               value={formData.text}
-              onChange={(e) => setFormData({ ...formData, text: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, text: e.target.value })
+              }
             />
             <button type="submit">{editingTask ? "Save" : "Add"}</button>
           </form>
         </Modal>
       )}
-    </>
+    </div>
   );
 };
 

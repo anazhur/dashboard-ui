@@ -1,0 +1,80 @@
+@import "../../styles/_variables";
+
+.clock {
+  display: grid;
+  gap: 12px;
+  color: $text;
+  font-family: $font;
+}
+
+/* цифровая часть сверху */
+.top {
+  display: grid;
+  gap: 4px;
+}
+.digital {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.date {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* круг */
+.analog {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: $shadow-outset;
+}
+.hand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 50% 100%;
+  translate: -50% -100%;
+  border-radius: 4px;
+}
+.hour {
+  width: 6px;
+  height: 70px;
+  background: $text;
+}
+.minute {
+  width: 4px;
+  height: 95px;
+  background: $text;
+  opacity: 0.9;
+}
+.second {
+  width: 2px;
+  height: 105px;
+  background: $accent;
+}
+.centerDot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: $text;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+}
+.tick {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 14px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  transform-origin: 50% 100px;
+  translate: -50% -100px;
+}

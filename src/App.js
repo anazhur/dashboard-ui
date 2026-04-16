@@ -1,18 +1,10 @@
 import './styles/App.scss';
-import Calendar from "./components/Calendar";
-import Clock from "./components/Clock";
-import LoFiPlayer from "./components/LoFiPlayer";
-import PomodoroTimer from "./components/PomodoroTimer";
-import Taskboard from "./components/Taskboard";
+import Layout from "./layout/Layout";
 
 function App() {
   return (
     <div className="App">
-      <Calendar />
-      <Clock />
-      <LoFiPlayer />
-      <PomodoroTimer />
-      <Taskboard />
+<Layout />
     </div>
   );
 }
