@@ -1,6 +1,6 @@
 @import "./_variables";
 .block {
-  background: $card-bg;
+  background: var(--card-bg);
   border-radius: $radius;
   padding: 16px;
   box-shadow: $shadow-outset;

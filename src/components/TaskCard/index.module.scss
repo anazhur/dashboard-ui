@@ -5,7 +5,7 @@
 
   border-radius: 16px;
   padding: 12px;
-  background: $card-bg;
+  background: var(--card-bg);
 
   display: flex;
   justify-content: space-between;
@@ -53,7 +53,7 @@
 
   border-radius: 50%;
 
-  background: $bg;
+  background: var(--bg);
 
   display: flex;
   align-items: center;
@@ -75,7 +75,7 @@
 
 .actionBtn:hover {
   transform: translateY(-1px);
-  background: $task-card-bg;
+  background: var(--task-card-bg);
 }
 
 .actionBtn:active {

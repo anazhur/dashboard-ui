@@ -14,12 +14,12 @@
 
   padding: 12px;
   border-radius: 20px;
-  background: $bg;
+  background: var(--bg);
   box-shadow: $shadow-inset;
 }
 
 .columnTitle {
-  color: $text;
+  color: var(--text);
   font-size: 18px;
   margin-bottom: 10px;
   display: flex;
@@ -45,8 +45,8 @@
 
 .columnTitle button {
   background: none;
-  color: $text;
-  background: $bg;
+  color: var(--text);
+  background: var(--bg);
   box-shadow: $shadow-outset;
   width: 50px;
   height: 50px;
@@ -58,5 +58,5 @@
 }
 
 .columnTitle button:hover {
-  background-color: $task-card-bg;
+  background-color: var(--task-card-bg);
 }

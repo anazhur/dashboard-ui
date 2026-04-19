@@ -1,38 +1,66 @@
 @import "../../styles/_variables";
 
 .clock {
-  display: grid;
-  gap: 12px;
-  color: $text;
-  font-family: $font;
-}
-
-/* цифровая часть сверху */
-.top {
-  display: grid;
-  gap: 4px;
-}
-.digital {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-.date {
-  font-size: 14px;
-  opacity: 0.85;
-}
-
-/* круг */
-.analog {
   position: relative;
-  width: 220px;
-  height: 220px;
-  margin: 0 auto;
-  border-radius: 50%;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: $shadow-outset;
+  width: 100%;
+  height: 100%;
+
+  color: var(--text);
+  font-family: $font;
+
+  overflow: hidden;
 }
+
+.digitalBg {
+  position: absolute;
+  top: 50%;
+  left: 49.5%;
+  transform: translate(-50%, -50%);
+  font-size: 240px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0.12;
+  pointer-events: none;
+
+  z-index: 1;
+
+  font-family: $clock-font;
+  font-variant-numeric: tabular-nums;
+}
+
+.group {
+  display: flex;
+  letter-spacing: -10px;
+}
+
+.colon {
+  margin: 0 4px;
+}
+
+.analog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 180px;
+  height: 180px;
+
+  border-radius: 50%;
+  background: var(--bg);
+
+  box-shadow:
+    inset 2px 2px 6px rgba(0, 0, 0, 0.05),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.6),
+    6px 6px 14px rgba(0, 0, 0, 0.08);
+
+  z-index: 2;
+}
+
 .hand {
   position: absolute;
   left: 50%;
@@ -41,40 +69,109 @@
   translate: -50% -100%;
   border-radius: 4px;
 }
+
 .hour {
-  width: 6px;
-  height: 70px;
-  background: $text;
+  width: 5px;
+  height: 55px;
+  background: var(--text);
 }
+
 .minute {
-  width: 4px;
-  height: 95px;
-  background: $text;
+  width: 3px;
+  height: 75px;
+  background: var(--text);
   opacity: 0.9;
 }
+
 .second {
   width: 2px;
-  height: 105px;
-  background: $accent;
+  height: 82px;
+  background: var(--accent);
 }
+
 .centerDot {
   position: absolute;
   width: 10px;
   height: 10px;
-  background: $text;
+  background: var(--text);
   border-radius: 50%;
   left: 50%;
   top: 50%;
   translate: -50% -50%;
 }
+
 .tick {
   position: absolute;
   left: 50%;
   top: 50%;
   width: 2px;
   height: 14px;
-  background: rgba(0, 0, 0, 0.25);
+  background: var(--text);
   border-radius: 2px;
-  transform-origin: 50% 100px;
-  translate: -50% -100px;
+  transform-origin: 50% 80px;
+  translate: -50% -80px;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 16px;
+  width: 100%;
+
+  text-align: center;
+
+  font-size: 14px;
+  opacity: 0.7;
+
+  z-index: 2;
+}
+
+.settingsBtn {
+  position: absolute;
+  top: 0;
+  right: 16px;
+
+  z-index: 3;
+
+  background: none;
+  color: var(--text);
+  background: var(--bg);
+  box-shadow: $shadow-outset;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  padding: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.settingsBtn:hover {
+  background-color: var(--task-card-bg);
+}
+
+.ampm {
+  position: absolute;
+  top: 17%;
+  left: 28%;
+  font-size: 14px;
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.week {
+  position: absolute;
+  bottom: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  font-size: 14px;
+  opacity: 0.5;
+  letter-spacing: 1px;
+  color: var(--accent);
+}
+
+.activeDay {
+  color: var(--text);
+  font-weight: 600;
 }

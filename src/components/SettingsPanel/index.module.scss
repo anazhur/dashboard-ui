@@ -1,0 +1,87 @@
+@import "../../styles/_variables";
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--text);
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.options {
+  display: flex;
+  gap: 10px;
+}
+
+.option {
+  flex: 1;
+  padding: 10px;
+  border-radius: 50px;
+
+  background: var(--bg);
+  box-shadow: $shadow-outset;
+
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+
+  font-size: 14px;
+}
+
+.option:hover {
+  background: var(--task-card-bg);
+}
+
+.active {
+  transform: scale(0.92);
+
+  box-shadow:
+    inset 3px 3px 6px rgba(0, 0, 0, 0.12),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.9);
+}
+
+.themes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  justify-items: center;
+}
+
+.themeBtn {
+  margin: 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+
+  border: none;
+  cursor: pointer;
+
+  box-shadow: $shadow-outset;
+  transition: 0.2s;
+}
+
+.themeBtn:hover {
+  transform: translateY(-2px);
+}
+
+.activeTheme {
+  box-shadow: $shadow-inset;
+  transform: scale(0.9);
+}

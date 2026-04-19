@@ -22,7 +22,7 @@
 }
 
 .inactive {
-  stroke: $text;
+  stroke: var(--text);
   stroke-width: 2;
   opacity: 0.4;
 
@@ -32,7 +32,7 @@
 }
 
 .active {
-  stroke: $accent;
+  stroke: var(--accent);
   stroke-width: 2;
   opacity: 1;
 
@@ -77,7 +77,7 @@
 
   border-radius: 50%;
 
-  background: $bg;
+  background: var(--bg);
 
   display: flex;
   align-items: center;
@@ -97,7 +97,7 @@
 }
 
 .controls button:hover {
-  background-color: $task-card-bg;
+  background-color: var(--task-card-bg);
 
   box-shadow:
     6px 6px 12px rgba(0, 0, 0, 0.1),

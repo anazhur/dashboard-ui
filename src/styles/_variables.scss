@@ -1,12 +1,12 @@
 /* colors */
-$bg: #e3ded7;
-$text: #2b241f;
-$accent: #614832;
-$card-bg: #e3ded7;
-$task-card-bg:#ddd8d0;
+$bg: #e9dec9;
+$text: #5f3228;
+$accent: #764439;
+$card-bg: #e9dec9;
+$task-card-bg:#e0d7c7;
 
 /* shadows */
-$shadow-light: rgba(255,255,255,1);
+$shadow-light: rgba(235, 235, 235, 0.575);
 $shadow-dark: rgba(13,39,80,0.12);
 
 $shadow-outset: 
@@ -19,6 +19,7 @@ $shadow-inset:
 
 /* font */
 $font: 'Lato', sans-serif;
+$clock-font: 'Inconsolata', monospace;
 
 /* radii / gaps */
 $radius: 16px;

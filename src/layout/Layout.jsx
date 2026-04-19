@@ -5,7 +5,6 @@ import Clock from "../components/Clock";
 import LoFiPlayer from "../components/LoFiPlayer";
 import PomodoroTimer from "../components/PomodoroTimer";
 import Taskboard from "../components/Taskboard";
-import Meta from "../components/Meta";
 
 export default function Layout() {
   return (
@@ -16,8 +15,6 @@ export default function Layout() {
       <div className={`${s.clock} block`}>
         <Clock />
       </div>
-      {/* <div className={`${s.meta} block`}><Meta /></div> */}
-
       <div className={`${s.pomodoro} block`}>
         <PomodoroTimer />
       </div>

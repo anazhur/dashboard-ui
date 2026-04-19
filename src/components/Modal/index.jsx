@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import s from "./index.module.scss";
 
+
 const Modal = ({ isOpen, onClose, children }) => {
   useEffect(() => {
     const handleKey = (e) => {

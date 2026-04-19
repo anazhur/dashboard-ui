@@ -20,7 +20,7 @@
   padding: 20px;
   border-radius: 20px;
 
-  background: $bg;
+  background: var(--bg);
   box-shadow: $shadow-outset;
 
   display: flex;
@@ -67,7 +67,7 @@
   padding: 10px;
   border-radius: 12px;
 
-  background: $bg;
+  background: var(--bg);
   border: none;
 
   box-shadow:
@@ -81,7 +81,7 @@
 
 .modal button:hover {
   transform: translateY(-1px);
-  background: $task-card-bg;
+  background: var(--task-card-bg);
 }
 
 .modal button:active {

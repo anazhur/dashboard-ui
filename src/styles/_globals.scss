@@ -1,4 +1,7 @@
+@import "./_themes";
+
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
 
 html, body, #root {
   height: 100%;
@@ -14,8 +17,8 @@ html, body, #root {
 
 body {
   font-family: $font;
-  background-color: $bg;
-  color: $text;
+  background-color: var(--bg);
+  color: var(--text);
   display: flex;
   overflow-x: hidden;
 }
@@ -23,8 +26,7 @@ body {
 button {
   cursor: pointer;
   border: none;
-  background-color: #fff;
-  color: $text;
+  color: var(--text);
   padding: 6px 12px;
   border-radius: 12px;
   transition: background-color 0.2s, transform 0.2s;
@@ -36,14 +38,14 @@ button:hover {
 }
 
 input, textarea {
-  background-color: #fff;
+  background-color: transparent;
   border: 1px solid #ccc;
   border-radius: 12px;
   padding: 6px 10px;
-  color: $text;
+  color: var(--text);
 }
 
 input:focus, textarea:focus {
   outline: none;
-  border-color: $accent;
+  border-color: var(--accent);
 }
