@@ -74,42 +74,43 @@ const Calendar = () => {
   const days = getDaysArray(currentYear, currentMonth);
 
   return (
-    <div className={s.calendar}>
-      <div className={s.calendar__header}>
-        <button onClick={handlePrevMonth}>←</button>
-        <h3>
-          {new Date(currentYear, currentMonth).toLocaleString("en-US", {
-            month: "long",
-            year: "numeric",
-          })}
-        </h3>
-        <button onClick={handleNextMonth}>→</button>
-      </div>
-
-      <div className={s.calendar__weekdays}>
-        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
-          <div key={d}>{d}</div>
-        ))}
-      </div>
-
-      <div className={s.calendar__days}>
-        {days.map((d, idx) => (
-          <div
-            key={idx}
-            className={`${s.day} ${!d.inCurrentMonth ? s["other-month"] : ""} ${
-              d.inCurrentMonth &&
-              d.day === today.getDate() &&
-              currentMonth === today.getMonth() &&
-              currentYear === today.getFullYear()
-                ? s.today
-                : ""
-            }`}
-          >
-            {d.day}
-          </div>
-        ))}
-      </div>
+     <div className={s.calendar}>
+    <div className={s.bgMonth}>
+      {new Date(currentYear, currentMonth).toLocaleString("en-US", {
+        month: "long",
+        year: "numeric",
+      })}
     </div>
+
+    <div className={s.calendar__header}>
+      <button onClick={handlePrevMonth}>←</button>
+      <button onClick={handleNextMonth}>→</button>
+    </div>
+
+    <div className={s.calendar__weekdays}>
+      {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
+        <div key={d}>{d}</div>
+      ))}
+    </div>
+
+    <div className={s.calendar__days}>
+      {days.map((d, idx) => (
+        <div
+          key={idx}
+          className={`${s.day} ${!d.inCurrentMonth ? s["other-month"] : ""} ${
+            d.inCurrentMonth &&
+            d.day === today.getDate() &&
+            currentMonth === today.getMonth() &&
+            currentYear === today.getFullYear()
+              ? s.today
+              : ""
+          }`}
+        >
+          {d.day}
+        </div>
+      ))}
+    </div>
+  </div>
   );
 };
 

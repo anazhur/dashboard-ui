@@ -5,7 +5,9 @@
 
   border-radius: 16px;
   padding: 12px;
+  margin: 5px;
   background: var(--card-bg);
+  color: var(--text);
 
   display: flex;
   justify-content: space-between;
@@ -62,9 +64,7 @@
   line-height: 0;
   padding: 0;
 
-  box-shadow:
-    4px 4px 8px rgba(0, 0, 0, 0.08),
-    -4px -4px 8px rgba(255, 255, 255, 0.8);
+  box-shadow: $shadow-outset;
 
   opacity: 1;
 
@@ -82,8 +82,8 @@
   transform: scale(0.92);
 
   box-shadow:
-    inset 3px 3px 6px rgba(0, 0, 0, 0.12),
-    inset -3px -3px 6px rgba(255, 255, 255, 0.9);
+    inset 3px 3px 6px var(--shadow-dark),
+    inset -3px -3px 6px var(--shadow-light);
 }
 
 .actionBtn svg {
@@ -112,9 +112,7 @@
   inset: 0;
   border-radius: 16px;
 
-  box-shadow:
-    4px 4px 8px #c9c9c9,
-    -4px -4px 8px #ffffff;
+  box-shadow: $shadow-outset;
 
   z-index: -1;
   will-change: transform;

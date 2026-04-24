@@ -1,62 +1,123 @@
+@import "../../styles/_variables";
+
 .calendar {
-  color: rgb(0, 0, 0);
-  font-family: sans-serif;
+  position: relative;
+
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  height: 280px;
+
+  color: var(--text);
 }
 
 .calendar__header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  justify-content: space-between;
 
-  button {
-    background: none;
-    border: 1px solid rgb(0, 0, 0);
-    color: rgb(0, 0, 0);
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+  min-height: 28px;
+  z-index: 1;
+}
 
-    &:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-  }
+.calendar__header button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 
-  h3 {
-    margin: 0;
-    font-size: 18px;
-  }
+  background: var(--bg);
+  box-shadow: $shadow-outset;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 13px;
+}
+
+.calendar__header button:active {
+   transform: scale(0.95);
+
+  box-shadow:
+    inset 3px 3px 6px var(--shadow-dark),
+    inset -3px -3px 6px var(--shadow-light);
 }
 
 .calendar__weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-  margin-bottom: 5px;
+  justify-items: center;
 
-  div {
-    font-weight: bold;
-    text-align: center;
-  }
+  font-size: 11px;
+  opacity: 0.55;
+  text-align: center;
+
+  margin-top: -10px;
 }
 
 .calendar__days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+  justify-items: center;
 
-  .day {
-    padding: 10px;
-    text-align: center;
-    border-radius: 4px;
+  flex: 1;
+  gap: 4px;
 
-    &.other-month {
-      color: gray;
-    }
+  padding: 0 2px;
+}
 
-    &.today {
-      background-color: rgba(255, 255, 255, 0.288);
-    }
-  }
+.calendar__weekdays div {
+  width: fit-content; 
+}
+
+.day {
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.day:hover {
+  transform: translateY(-1px);
+}
+
+.day:active {
+  box-shadow: $shadow-inset;
+}
+
+.today {
+  background: var(--accent);
+  color: var(--text);
+
+  box-shadow: $shadow-inset;
+  font-weight: 600;
+}
+
+.other-month {
+  opacity: 0.25;
+}
+
+.bgMonth {
+  position: absolute;
+  transform: translateX(-50%);
+  top: 55px;
+  left: 50%;
+  font-size: 80px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  text-align: center;
+  color: var(--text);
+
+  opacity: 0.12;
+  pointer-events: none;
 }

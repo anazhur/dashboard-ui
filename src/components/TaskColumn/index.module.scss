@@ -15,7 +15,7 @@
   padding: 12px;
   border-radius: 20px;
   background: var(--bg);
-  box-shadow: $shadow-inset;
+  box-shadow: $shadow-outset;
 }
 
 .columnTitle {
@@ -59,4 +59,12 @@
 
 .columnTitle button:hover {
   background-color: var(--task-card-bg);
+}
+
+.columnTitle button:active {
+   transform: scale(0.95);
+
+  box-shadow:
+    inset 3px 3px 6px var(--shadow-dark),
+    inset -3px -3px 6px var(--shadow-light);
 }

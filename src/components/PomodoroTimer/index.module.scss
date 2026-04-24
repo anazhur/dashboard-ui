@@ -64,6 +64,7 @@
   font-size: 42px;
   font-weight: 600;
   margin-bottom: 20px;
+  color: var(--text);
 }
 
 .controls {
@@ -87,9 +88,7 @@
 
   border: none;
 
-  box-shadow:
-    4px 4px 8px rgba(0, 0, 0, 0.08),
-    -4px -4px 8px rgba(255, 255, 255, 0.8);
+ box-shadow: $shadow-outset;
 
   transition:
     transform 0.15s ease,
@@ -98,18 +97,14 @@
 
 .controls button:hover {
   background-color: var(--task-card-bg);
-
-  box-shadow:
-    6px 6px 12px rgba(0, 0, 0, 0.1),
-    -6px -6px 12px rgba(255, 255, 255, 0.9);
 }
 
 .controls button:active {
   transform: scale(0.95);
 
   box-shadow:
-    inset 3px 3px 6px rgba(0, 0, 0, 0.1),
-    inset -3px -3px 6px rgba(255, 255, 255, 0.8);
+    inset 3px 3px 6px var(--shadow-dark),
+    inset -3px -3px 6px var(--shadow-light);
 }
 
 .controls button svg {

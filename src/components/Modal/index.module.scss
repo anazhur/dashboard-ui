@@ -33,6 +33,7 @@
 .modal h3 {
   margin: 0;
   font-size: 16px;
+  color: var(--text);
 }
 
 .modal form {
@@ -48,8 +49,8 @@
   padding: 8px 10px;
   border-radius: 12px;
 
-  background: $bg;
-  border: 1px solid rgba(102, 102, 102, 0.2);
+  box-shadow: $shadow-outset;
+  border: none;
 
   outline: none;
 
@@ -70,9 +71,7 @@
   background: var(--bg);
   border: none;
 
-  box-shadow:
-    4px 4px 8px rgba(0, 0, 0, 0.08),
-    -4px -4px 8px rgba(255, 255, 255, 0.8);
+  box-shadow: $shadow-outset;
 
   transition:
     transform 0.12s ease,
@@ -80,16 +79,15 @@
 }
 
 .modal button:hover {
-  transform: translateY(-1px);
-  background: var(--task-card-bg);
+  background-color: var(--task-card-bg);
 }
 
 .modal button:active {
-  transform: scale(0.97);
+  transform: scale(0.95);
 
   box-shadow:
-    inset 3px 3px 6px rgba(0, 0, 0, 0.12),
-    inset -3px -3px 6px rgba(255, 255, 255, 0.9);
+    inset 3px 3px 6px var(--shadow-dark),
+    inset -3px -3px 6px var(--shadow-light);
 }
 
 @keyframes fadeIn {

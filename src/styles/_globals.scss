@@ -38,7 +38,7 @@ button:hover {
 }
 
 input, textarea {
-  background-color: transparent;
+  background-color: var(--bg);
   border: 1px solid #ccc;
   border-radius: 12px;
   padding: 6px 10px;
