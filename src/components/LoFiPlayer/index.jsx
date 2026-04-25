@@ -3,9 +3,9 @@ import s from "./index.module.scss";
 
 const LoFiPlayer = () => {
   const tracks = [
-    "/tracks/days-off-matrika-main-version-39449-02-56.mp3",
-    "/tracks/pink-swan-qube-main-version-23975-02-30.mp3",
-    "/tracks/wayfarer-color-parade-main-version-02-17-14023.mp3",
+    `${process.env.PUBLIC_URL}/tracks/days-off-matrika-main-version-39449-02-56.mp3`,
+    `${process.env.PUBLIC_URL}/tracks/pink-swan-qube-main-version-23975-02-30.mp3`,
+    `${process.env.PUBLIC_URL}/tracks/wayfarer-color-parade-main-version-02-17-14023.mp3`,
   ];
 
   const [currentTrack, setCurrentTrack] = useState(0);
@@ -13,26 +13,41 @@ const LoFiPlayer = () => {
   const [volume, setVolume] = useState(0.5);
   const [isManualSkip, setIsManualSkip] = useState(false);
 
-  const audioRef = useRef(new Audio(tracks[0]));
+  const audioRef = useRef(null);
   const fadeDuration = 5;
 
-  /* ▶ play / pause */
   useEffect(() => {
+    const audio = new Audio(tracks[currentTrack]);
+    audio.volume = volume;
+
+    audioRef.current = audio;
+
     if (isPlaying) {
-      audioRef.current.play();
+      audio.play().catch(() => {});
+    }
+
+    return () => {
+      audio.pause();
+    };
+  }, [currentTrack]);
+
+  useEffect(() => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.play().catch(() => {});
     } else {
       audioRef.current.pause();
     }
   }, [isPlaying]);
 
-  /* 🔊 volume */
   useEffect(() => {
+    if (!audioRef.current) return;
     audioRef.current.volume = volume;
   }, [volume]);
 
-  /* 🎧 crossfade (НЕ срабатывает при ручном skip) */
   useEffect(() => {
-    if (!isPlaying || isManualSkip) return;
+    if (!isPlaying || isManualSkip || !audioRef.current) return;
 
     const currentAudio = audioRef.current;
     let intervalId = null;
@@ -48,7 +63,7 @@ const LoFiPlayer = () => {
         const nextTrackIndex = (currentTrack + 1) % tracks.length;
         const nextAudio = new Audio(tracks[nextTrackIndex]);
         nextAudio.volume = 0;
-        nextAudio.play();
+        nextAudio.play().catch(() => {});
 
         let step = 0.02;
 
@@ -59,7 +74,7 @@ const LoFiPlayer = () => {
           if (currentAudio.volume <= 0 && nextAudio.volume >= volume) {
             clearInterval(crossfade);
 
-            currentAudio.pause(); // 💥 ВАЖНО
+            currentAudio.pause();
 
             audioRef.current = nextAudio;
             setCurrentTrack(nextTrackIndex);
@@ -72,60 +87,49 @@ const LoFiPlayer = () => {
     return () => clearInterval(intervalId);
   }, [currentTrack, isPlaying, volume, isManualSkip]);
 
-  /* ▶/⏸ */
   const handlePlayPause = () => {
     setIsPlaying((prev) => !prev);
   };
 
-  /* ⏭ */
   const handleNext = () => {
     setIsManualSkip(true);
 
     const nextTrackIndex = (currentTrack + 1) % tracks.length;
 
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
 
-    const nextAudio = new Audio(tracks[nextTrackIndex]);
-    nextAudio.volume = volume;
-
-    audioRef.current = nextAudio;
     setCurrentTrack(nextTrackIndex);
-
-    if (isPlaying) nextAudio.play();
 
     setTimeout(() => setIsManualSkip(false), 300);
   };
 
-  /* ⏮ */
   const handlePrev = () => {
     setIsManualSkip(true);
 
     const prevTrack = (currentTrack - 1 + tracks.length) % tracks.length;
 
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
 
-    const prevAudio = new Audio(tracks[prevTrack]);
-    prevAudio.volume = volume;
-
-    audioRef.current = prevAudio;
     setCurrentTrack(prevTrack);
-
-    if (isPlaying) prevAudio.play();
 
     setTimeout(() => setIsManualSkip(false), 300);
   };
 
-  /* 🔊 */
   const handleVolumeChange = (e) => {
     setVolume(parseFloat(e.target.value));
   };
 
-  /* cleanup */
   useEffect(() => {
     return () => {
-      audioRef.current.pause();
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
     };
   }, []);
 
