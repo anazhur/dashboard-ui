@@ -1,6 +1,7 @@
 # 🧠 Dashboard UI
 
 A clean and minimal dashboard interface with customizable themes, combining productivity tools and ambient experience.
+Live preview: https://anazhur.github.io/dashboard-ui/
 
 ## ✨ Features
 
